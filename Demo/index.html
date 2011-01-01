@@ -1,0 +1,54 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+</head>
+<body>
+    <a href="javascript:;" id='set'>set</a>
+    <a href="javascript:;" id='get'>get</a>
+    <a href="javascript:;" id='remove'>remove</a>
+    <a href="javascript:;" id='list'>filelist</a>
+    <div id="res"></div>
+	<script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/mootools/1.2.4/mootools-yui-compressed.js'></script>
+    <script type="text/javascript" src="../Source/LocalStorage.js"></script>
+    <script type="text/javascript" src="../Source/LocalFileStorage.js"></script>
+    <script type="text/javascript">
+    var lfs = new LocalFileStorage({debug:true});
+    
+    $('set').addEvent('click',
+      function() {
+        var n = prompt('Name of file to save: ', '');
+        if(n && n !== '') {
+          lfs.save(n,{a:1,b:2});
+        }
+      }
+    );
+    
+    $('get').addEvent('click',
+      function() {
+        var n = prompt('Name of file to open: ', '');
+        if(n && n !== '') {
+          console.log('File: ', lfs.read(n));
+        }
+      }
+    );
+    
+    $('remove').addEvent('click',
+      function() {
+        var n = prompt('Name of file to remove: ', '');
+        if(n && n !== '') {
+          lfs.remove(n);
+        }
+      }
+    );
+    
+    $('list').addEvent('click',
+      function() {
+        var l = lfs.getList();
+        console.log('File List: ', l);
+      }
+    );
+    </script>
+</body>
+</html>
